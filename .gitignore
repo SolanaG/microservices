@@ -1,5 +1,3 @@
 node_modules/
 
-star-wars-api-microservices/database/.env
-
-/.env
+.env

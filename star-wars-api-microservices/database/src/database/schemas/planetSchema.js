@@ -1,6 +1,6 @@
 const { Schema } = require("mongoose");
 
-const PlanetSchema = new Schema({
+const planetSchema = new Schema({
   _id: String,
   name: String,
   rotation_period: String,
@@ -14,4 +14,20 @@ const PlanetSchema = new Schema({
   films: [{ type: String, ref: "Planet" }],
 });
 
-module.exports = PlanetSchema;
+planetSchema.statics.list = async function () {
+  return await this.find()
+    .populate("residents", ["_id", "name"])
+    .populate("films", ["_id", "title"]);
+};
+
+planetSchema.statics.get = async function (_id) {
+  return await this.findOne({ _id })
+    .populate("residents", ["_id", "name"])
+    .populate("films", ["_id", "title"]);
+};
+
+planetSchema.statics.insert = async function (planet) {
+  return await this.create(planet);
+};
+
+module.exports = planetSchema;

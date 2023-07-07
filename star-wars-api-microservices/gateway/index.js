@@ -30,13 +30,13 @@ app.use(
   })
 );
 
-// app.use(
-//   "/database",
-//   createProxyMiddleware({
-//     target: "http://planets:8004",
-//     changeOrigin: true,
-//   })
-// );
+app.use(
+  "/database",
+  createProxyMiddleware({
+    target: "http://planets:8004",
+    changeOrigin: true,
+  })
+);
 
 app.listen(8000, () => {
   console.log("Gateway on port 8000");

@@ -1,7 +1,8 @@
 const { response } = require("../utils");
+const Character = require("../data");
 
 module.exports = async (req, res) => {
   const { id } = req.params;
-  const characters = await axios.get(`http://database:8004/Character/${id}`);
+  const characters = await Character.getById(id);
   response(res, 200, characters.data);
 };

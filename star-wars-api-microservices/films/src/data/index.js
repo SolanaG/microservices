@@ -1,10 +1,15 @@
-const films = require("./films.json");
+const axios = require("axios");
 
 module.exports = {
   list: async () => {
-    return films;
+    return await axios.get("http://database:8004/Film");
   },
-  create: async () => {
-    throw Error("Hubo un error al crear el película");
+
+  getById: async (_id) => {
+    return await axios.get(`http://database:8004/Film/${_id}`);
+  },
+
+  create: async (body) => {
+    return await axios.post("http://database:8004/Film", body);
   },
 };
